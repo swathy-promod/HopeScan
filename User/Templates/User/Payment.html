@@ -1,0 +1,122 @@
+{% extends 'User/Header.html' %}
+{% block content %}
+
+<section class="section py-5">
+  <div class="container">
+    <div class="row gy-4">
+      <div class="col-lg-7">
+        <div class="card shadow-sm border-0">
+          <div class="card-body p-4">
+            <div class="d-flex justify-content-between align-items-start mb-4">
+              <div>
+                <h2 class="h4 mb-1">Secure Payment</h2>
+                <p class="text-muted mb-0">Complete your booking with a fast and secure checkout experience.</p>
+              </div>
+              <div class="text-end">
+                <span class="badge bg-success">Pay now</span>
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <div class="d-flex gap-2 align-items-center flex-wrap">
+                <span class="badge bg-light text-dark border">Visa</span>
+                <span class="badge bg-light text-dark border">Mastercard</span>
+                <span class="badge bg-light text-dark border">RuPay</span>
+                <span class="badge bg-light text-dark border">UPI</span>
+              </div>
+            </div>
+
+            <form method="post">
+              {% csrf_token %}
+              <div class="mb-3">
+                <label for="cardNumber" class="form-label">Card Number</label>
+                <div class="input-group">
+                  <span class="input-group-text"><i class="bi bi-credit-card-2-front"></i></span>
+                  <input type="text" id="cardNumber" name="txt_name" class="form-control" placeholder="1234 5678 9012 3456" inputmode="numeric" maxlength="19" required>
+                </div>
+              </div>
+
+              <div class="row gx-3">
+                <div class="col-md-6 mb-3">
+                  <label for="cardHolder" class="form-label">Cardholder Name</label>
+                  <input type="text" id="cardHolder" name="txt_onwer" class="form-control" placeholder="Your Name" title="Name Allows Only Alphabets, Spaces and First Letter Must Be Capital Letter" pattern="^[A-Z]+[a-zA-Z ]*$" required>
+                </div>
+                <div class="col-md-3 mb-3">
+                  <label for="expiryDate" class="form-label">Expiry</label>
+                  <input type="month" id="expiryDate" name="txt_date" class="form-control" required>
+                </div>
+                <div class="col-md-3 mb-3">
+                  <label for="cvv" class="form-label">CVV</label>
+                  <input type="password" id="cvv" name="txt_exp" class="form-control" placeholder="•••" maxlength="4" pattern="\d{3,4}" required>
+                </div>
+              </div>
+
+              <div class="mb-4">
+                <label for="amount" class="form-label">Amount</label>
+                <div class="input-group">
+                  <span class="input-group-text">₹ {{paydata.booking_amount|default:'0.00'}}</span>
+                </div>
+              </div>
+
+              <div class="form-check form-switch mb-4">
+                <input class="form-check-input" type="checkbox" id="saveCard">
+                <label class="form-check-label" for="saveCard">Save this card for future payments</label>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-lg w-100">Pay ₹ {{ paydata.booking_amount|default:'0.00' }}</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-5">
+        <div class="card shadow-sm border-0 h-100">
+          <div class="card-body">
+            <h3 class="h5 mb-3">Booking Summary</h3>
+            <div class="mb-3">
+              <div class="d-flex justify-content-between text-muted mb-1">
+                <span>Doctor</span>
+                <span>{{ paydata.slot.doctor.doctorregistration_name }}</span>
+              </div>
+              <div class="d-flex justify-content-between text-muted mb-1">
+                <span>Speciality</span>
+                <span>{{ paydata.slot.doctor.doctorregistration_speciality|default:'General' }}</span>
+              </div>
+              <div class="d-flex justify-content-between text-muted mb-1">
+                <span>Date</span>
+                <span>{{ paydata.booking_date }}</span>
+              </div>
+              <div class="d-flex justify-content-between text-muted mb-1">
+                <span>Time</span>
+                <span>{{ paydata.booking_time }}</span>
+              </div>
+              <div class="d-flex justify-content-between text-muted mb-1">
+                <span>Consult fee</span>
+                <span>₹ {{ paydata.slot.doctor.doctorregistration_fees }}</span>
+              </div>
+            </div>
+            <hr>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <strong>Total</strong>
+              <strong>₹ {{ paydata.booking_amount|default:'0.00' }}</strong>
+            </div>
+            <p class="text-muted small">Payments are secured and encrypted. Your card details are never stored in plain text.</p>
+            <div class="mt-4">
+              <h6 class="mb-3">Need Help?</h6>
+              <div class="d-flex align-items-center mb-2">
+                <i class="bi bi-telephone-fill me-2 text-primary"></i>
+                <span class="text-muted">Call us at +91 6282121953</span>
+              </div>
+              <div class="d-flex align-items-center">
+                <i class="bi bi-envelope-fill me-2 text-primary"></i>
+                <span class="text-muted">support@bmh.com</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock content %}

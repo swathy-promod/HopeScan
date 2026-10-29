@@ -1,0 +1,66 @@
+{% extends 'Administrator/Header.html' %}
+{% block content %}
+
+<style>
+    .container-card{max-width:980px;margin:22px auto;padding:20px;border:1px solid #e9eef6;border-radius:8px;background:#fff}
+    .form-grid{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+    .form-grid label{min-width:90px}
+    .input-text,.input-select{flex:1;padding:8px;border:1px solid #ccd6e3;border-radius:4px}
+    .btn-submit{background:#28a745;color:#fff;border:none;padding:8px 14px;border-radius:4px;cursor:pointer}
+    .table{width:100%;border-collapse:collapse;margin-top:18px}
+    .table th,.table td{border:1px solid #e1e8f0;padding:10px;text-align:left}
+    .table th{background:#f6f9fc}
+    .actions a{margin-right:8px;text-decoration:none;color:#fff;padding:6px 10px;border-radius:4px}
+    .actions .delete{background:#e74c3c}
+    .actions .edit{background:#007bff}
+    @media (max-width:640px){.form-grid{flex-direction:column;align-items:stretch}}
+</style>
+
+<div class="container-card">
+    <h2 style="text-align:center;margin:0 0 14px">Place</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-grid">
+            <label for="select_district">District</label>
+            <select id="select_district" class="input-select" name="select_district" required>
+                <option value="">Select District</option>
+                {% for i in district %}
+                <option value="{{ i.id }}" {% if editdata and editdata.district and i.id == editdata.district.id %}selected{% endif %}>{{ i.district_name }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="txt_place">Place</label>
+            <input id="txt_place" class="input-text" type="text" name="txt_place" value="{{ editdata.place_name }}" required placeholder="Enter place name">
+
+            <button type="submit" class="btn-submit">Submit</button>
+        </div>
+
+        <h3 style="text-align:center;margin-top:20px">Place details</h3>
+        <table class="table" aria-label="Place list">
+            <tr>
+                <th>Slno</th>
+                <th>District</th>
+                <th>Place</th>
+                <th>Action</th>
+            </tr>
+            {% for i in place %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ i.district.district_name }}</td>
+                <td>{{ i.place_name }}</td>
+                <td class="actions">
+                    <a class="delete" href="{% url 'Administrator:Districtdelete' i.id %}">Delete</a>
+                    <a class="edit" href="{% url 'Administrator:Placeedit' i.id %}">Edit</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4" style="text-align:center;padding:14px">No places found.</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </form>
+</div>
+
+{% endblock %}

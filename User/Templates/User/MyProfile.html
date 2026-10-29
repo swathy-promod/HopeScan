@@ -1,0 +1,63 @@
+{% extends 'User/Header.html' %}
+{% block content %}
+
+<section class="section py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="row g-4 align-items-center">
+                            <div class="col-md-3 text-center">
+                                {% if userdata.userregistration_photo %}
+                                <img src="{{ userdata.userregistration_photo.url }}" alt="{{ userdata.userregistration_name }}" class="rounded-circle img-fluid" style="width:140px;height:140px;object-fit:cover;">
+                                {% else %}
+                                <div class="rounded-circle bg-light d-inline-flex align-items-center justify-content-center" style="width:140px;height:140px;">
+                                    <i class="bi bi-person fs-1 text-muted"></i>
+                                </div>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-6">
+                                <h3 class="mb-1">{{ userdata.userregistration_name }}</h3>
+                                <p class="text-muted mb-1">{{ userdata.userregistration_email }}</p>
+                                <p class="mb-1"><strong>Contact:</strong> {{ userdata.userregistration_contact }}</p>
+                                <p class="mb-0"><strong>Address:</strong> {{ userdata.userregistration_address }}</p>
+                                <p class="mb-0"><strong>Place:</strong> {{ userdata.userregistration_place.place_name }}, <strong>District:</strong> {{ userdata.userregistration_place.district.district_name }}</p>
+                            </div>
+                            <div class="col-md-3 text-md-end">
+                                <a href="{% url 'User:EditProfile' %}" class="btn btn-primary mb-2">Edit Profile</a>
+                                <a href="{% url 'User:ChangePassword' %}" class="btn btn-outline-secondary mb-2">Change Password</a>
+                            </div>
+                        </div>
+
+                        <hr class="my-4">
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="card p-3 text-center shadow-sm">
+                                    <h2 class="mb-0">{{ appointment_count }}</h2>
+                                    <small class="text-muted">Total Appointments</small>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card p-3 text-center shadow-sm">
+                                    <h2 class="mb-0">—</h2>
+                                    <small class="text-muted">Active Prescriptions</small>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card p-3 text-center shadow-sm">
+                                    <h2 class="mb-0">—</h2>
+                                    <small class="text-muted">Notifications</small>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

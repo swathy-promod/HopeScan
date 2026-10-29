@@ -1,0 +1,67 @@
+
+{% extends 'Administrator/Header.html' %}
+{% block content %}
+
+<style>
+    .container-card{max-width:860px;margin:22px auto;padding:20px;border:1px solid #eef6fb;border-radius:8px;background:#fff}
+    .form-grid{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+    .form-grid label{min-width:100px}
+    .input-text,.input-select{flex:1;padding:8px;border:1px solid #d1e0ef;border-radius:4px}
+    .btn-submit{background:#6f42c1;color:#fff;border:none;padding:8px 14px;border-radius:4px;cursor:pointer}
+    .table{width:100%;border-collapse:collapse;margin-top:18px}
+    .table th,.table td{border:1px solid #e8f0f9;padding:10px;text-align:left}
+    .table th{background:#f9fbff}
+    .actions a{margin-right:8px;text-decoration:none;color:#fff;padding:6px 10px;border-radius:4px}
+    .actions .delete{background:#c82333}
+    .actions .edit{background:#17a2b8}
+    @media (max-width:640px){.form-grid{flex-direction:column;align-items:stretch}}
+</style>
+
+<div class="container-card">
+    <h2 style="text-align:center;margin:0 0 14px">Subcategory</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-grid">
+            <label for="sel_category">Category</label>
+            <select id="sel_category" class="input-select" name="sel_category" required>
+                <option value="">Select Category</option>
+                {% for i in Category %}
+                <option value="{{ i.id }}" {% if editdata and editdata.category and i.id == editdata.category.id %}selected{% endif %}>{{ i.category_name }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="txt_subcategory">Subcategory</label>
+            <input id="txt_subcategory" class="input-text" type="text" name="txt_subcategory" value="{{ editdata.subcategory_name }}" required placeholder="Enter subcategory name">
+
+            <button type="submit" class="btn-submit">Submit</button>
+        </div>
+
+        <h3 style="text-align:center;margin-top:20px">Subcategory details</h3>
+        <table class="table" aria-label="Subcategory list">
+            <tr>
+                <th>Slno</th>
+                <th>Sub Category</th>
+                <th>Category</th>
+                <th>Action</th>
+            </tr>
+            {% for i in Subcategory %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ i.subcategory_name }}</td>
+                <td>{{ i.category.category_name }}</td>
+                <td class="actions">
+                    <a class="delete" href="{% url 'Administrator:Deletesubcategory' i.id %}">Delete</a>
+                    <a class="edit" href="{% url 'Administrator:editsubcategory' i.id %}">Edit</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4" style="text-align:center;padding:14px">No subcategories found.</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </form>
+</div>
+
+{% endblock %}

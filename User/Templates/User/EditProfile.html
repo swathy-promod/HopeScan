@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EditProfile</title>
+</head>
+<body>
+    <form method="POST">
+        {% csrf_token %}
+    <table>
+        <tr>
+            <td>name</td>
+            <td>
+                <input type="text" name="txt_name" value="{{userdata.userregistration_name}}"required placeholder="Enter Your Name" title="Name Allows Only Alphabets,Spaces and First Letter Must Be Capital Letter" pattern="^[A-Z]+[a-zA-Z ]*$" />
+            </td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td>
+                <input type="text" name="txt_email" value="{{userdata.userregistration_email}}"required placeholder="Enter Your Email"/>
+            </td>
+        </tr>
+        <tr>
+            <td>Contact</td>
+            <td>
+                <input type="text" name="txt_contact" value="{{userdata.userregistration_contact}}"required placeholder="Enter Your Contact" />
+            </td>
+        </tr>
+        <tr>
+            <td>Address</td>
+            <td>
+                <input type="text" name="txt_address" value="{{userdata.userregistration_address}}"required placeholder="Enter Your Address" />
+            </td>
+        </tr> 
+        <tr>
+            <td colspan="2" align="center"><input type="submit"></td>
+        </tr>
+    </table>
+    </form>
+</body>
+</html>

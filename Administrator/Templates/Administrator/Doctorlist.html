@@ -1,0 +1,62 @@
+
+{% extends 'Administrator/Header.html' %}
+{% block content %}
+
+<style>
+    .container-card{max-width:1100px;margin:18px auto;padding:18px;border:1px solid #eaf1fb;border-radius:8px;background:#fff}
+    .table{width:100%;border-collapse:collapse;margin-top:6px}
+    .table th,.table td{border:1px solid #e6eef8;padding:10px;vertical-align:middle}
+    .table th{background:#f7fbff;text-transform:capitalize}
+    .actions a{display:inline-block;margin-right:8px;padding:6px 10px;border-radius:4px;color:#fff;text-decoration:none}
+    .actions .accept{background:#28a745}
+    .actions .reject{background:#dc3545}
+    @media (max-width:900px){.table td:nth-child(5),.table th:nth-child(5),.table td:nth-child(6),.table th:nth-child(6){display:none}}
+    @media (max-width:700px){.table td:nth-child(7),.table th:nth-child(7),.table td:nth-child(8),.table th:nth-child(8){display:none}}
+</style>
+
+<div class="container-card">
+    <h2 style="text-align:center;margin:0 0 12px">Doctor list</h2>
+
+    <table class="table" aria-label="Doctor list">
+        <tr>
+            <th>slno</th>
+            <th>username</th>
+            <th>email</th>
+            <th>contact</th>
+            <th>address</th>
+            <th>district</th>
+            <th>place</th>
+            <th>exp</th>
+            <th>action</th>
+        </tr>
+        {% for i in doctorlist %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ i.doctorregistration_name }}</td>
+            <td>{{ i.doctorregistration_email }}</td>
+            <td>{{ i.doctorregistration_contact }}</td>
+            <td>{{ i.doctorregistration_address }}</td>
+            <td>{{ i.doctorregistration_place.district.district_name }}</td>
+            <td>{{ i.doctorregistration_place.place_name }}</td>
+            <td>{{ i.doctorregistration_exp }}</td>
+            <td class="actions">
+                <a class="accept" href="{% url 'Administrator:DoctorAccept' i.id %}">Accept</a>
+                <a class="reject" href="{% url 'Administrator:DoctorReject' i.id %}">Reject</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="9" style="text-align:center;padding:14px">No doctors found.</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% if msg %}
+<script>
+    alert("{{ msg }}");
+    window.location = "{% url 'Administrator:Doctorlist' %}";
+</script>
+{% endif %}
+
+{% endblock %}

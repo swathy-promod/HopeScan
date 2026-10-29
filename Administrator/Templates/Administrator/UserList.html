@@ -1,0 +1,66 @@
+
+{% extends 'Administrator/Header.html' %}
+{% block content %}
+
+<style>
+    .container-card{max-width:1100px;margin:18px auto;padding:18px;border:1px solid #eef7fb;border-radius:8px;background:#fff}
+    .table{width:100%;border-collapse:collapse;margin-top:6px}
+    .table th,.table td{border:1px solid #e9f1fa;padding:10px;vertical-align:middle}
+    .table th{background:#f8fcff;text-transform:capitalize}
+    .actions a{display:inline-block;margin-right:8px;padding:6px 10px;border-radius:4px;color:#fff;text-decoration:none}
+    .actions .accept{background:#28a745}
+    .actions .reject{background:#dc3545}
+    @media (max-width:900px){.table td:nth-child(5),.table th:nth-child(5),.table td:nth-child(6),.table th:nth-child(6){display:none}}
+    @media (max-width:700px){.table td:nth-child(7),.table th:nth-child(7){display:none}}
+</style>
+
+<div class="container-card">
+    <h2 style="text-align:center;margin:0 0 12px">User list</h2>
+
+    <table class="table" aria-label="User list">
+        <tr>
+            <th>slno</th>
+            <th>username</th>
+            <th>email</th>
+            <th>contact</th>
+            <th>address</th>
+            <th>district</th>
+            <th>place</th>
+            <th>action</th>
+        </tr>
+        {% for i in userlist %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ i.userregistration_name }}</td>
+            <td>{{ i.userregistration_email }}</td>
+            <td>{{ i.userregistration_contact }}</td>
+            <td>{{ i.userregistration_address }}</td>
+            <td>{{ i.userregistration_place.district.district_name }}</td>
+            <td>{{ i.userregistration_place.place_name }}</td>
+            <td class="actions">
+                {% if i.user_status == 0 %}
+                    <a class="accept" href="{% url 'Administrator:Accept' i.id %}">Accept</a>
+                    <a class="reject" href="{% url 'Administrator:Reject' i.id %}">Reject</a>
+                {% elif i.user_status == 1 %}
+                    <span style="color:#28a745;font-weight:600">Accepted</span>
+                {% else %}
+                    <span style="color:#dc3545;font-weight:600">Rejected</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="8" style="text-align:center;padding:14px">No users found.</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% if msg %}
+<script>
+    alert("{{ msg }}");
+    window.location = "{% url 'Administrator:userlist' %}";
+</script>
+{% endif %}
+
+{% endblock %}

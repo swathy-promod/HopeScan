@@ -1,0 +1,72 @@
+{% extends 'Doctor/Header.html' %}
+{% block content %}
+
+<section class="section py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="card shadow-sm border-0">
+          <div class="card-body p-4">
+            <div class="d-flex justify-content-between align-items-start mb-4">
+              <div>
+                <h2 class="h4 mb-1">Set Appointment Amount</h2>
+                <p class="text-muted mb-0">Confirm the booking amount for this patient appointment.</p>
+              </div>
+              <span class="badge bg-primary">Doctor Portal</span>
+            </div>
+
+            {% if appointment %}
+            <div class="mb-4 p-3 border rounded bg-light">
+              <div class="d-flex justify-content-between mb-2">
+                <span class="text-muted">Patient</span>
+                <strong>{{ appointment.user.userregistration_name }}</strong>
+              </div>
+              <div class="d-flex justify-content-between mb-2">
+                <span class="text-muted">Doctor</span>
+                <strong>{{ appointment.slot.doctor.doctorregistration_name }}</strong>
+              </div>
+              <div class="d-flex justify-content-between mb-2">
+                <span class="text-muted">Date</span>
+                <strong>{{ appointment.booking_date }}</strong>
+              </div>
+              <div class="d-flex justify-content-between mb-2">
+                <span class="text-muted">Time</span>
+                <strong>{{ appointment.booking_time }}</strong>
+              </div>
+              <div class="d-flex justify-content-between">
+                <span class="text-muted">Current Status</span>
+                {% if appointment.booking_status == 0 %}
+                <span class="badge bg-secondary">Pending</span>
+                {% elif appointment.booking_status == 1 %}
+                <span class="badge bg-success">Accepted</span>
+                {% elif appointment.booking_status == 2 %}
+                <span class="badge bg-danger">Rejected</span>
+                {% else %}
+                <span class="badge bg-info">Amount set</span>
+                {% endif %}
+              </div>
+            </div>
+            {% endif %}
+
+            <form method="post">
+              {% csrf_token %}
+              <div class="mb-3">
+                <label for="amount" class="form-label">Amount</label>
+                <div class="input-group input-group-lg">
+                  <span class="input-group-text">₹</span>
+                  <input type="number" step="0.01" min="0" id="amount" name="amount" class="form-control" placeholder="Enter amount" required>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between align-items-center">
+                <a href="{% url 'Doctor:ViewAppointment' %}" class="btn btn-outline-secondary">Back to Appointments</a>
+                <button type="submit" class="btn btn-primary">Save Amount</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock content %}

@@ -1,0 +1,82 @@
+{% extends 'Doctor/Header.html' %}
+{% block content %}
+<section class="py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-xl-10">
+        <div class="card shadow-sm border-0">
+          <div class="row g-0">
+            <div class="col-md-4 text-center bg-primary text-white p-4 rounded-start">
+              <img src="{{ doctordata.doctorregistration_photo.url }}" class="img-fluid rounded-circle mb-3" alt="Doctor Photo" style="max-width: 180px;">
+              <h3 class="h4 mb-1">{{ doctordata.doctorregistration_name }}</h3>
+              <p class="mb-1">Doctor</p>
+              <p class="small opacity-75">BMH Hospital</p>
+            </div>
+            <div class="col-md-8">
+              <div class="card-body p-4">
+                <div class="d-flex align-items-start justify-content-between mb-4">
+                  <div>
+                    <h2 class="h4">My Profile</h2>
+                    <p class="text-muted mb-0">Review your personal and contact details. Use the buttons below to update your profile or change your password.</p>
+                  </div>
+                  <div class="text-end">
+                    <a href="{% url 'Doctor:EditProfileDoctor' %}" class="btn btn-sm btn-outline-primary me-2">Edit Profile</a>
+                    <a href="{% url 'Doctor:ChangePasswordDoctor' %}" class="btn btn-sm btn-primary">Change Password</a>
+                  </div>
+                </div>
+
+                <div class="row gx-4 gy-3">
+                  <div class="col-sm-6">
+                    <div class="border rounded p-3 h-100">
+                      <h5 class="mb-2">Contact Info</h5>
+                      <p class="mb-1"><strong>Email:</strong> {{ doctordata.doctorregistration_email }}</p>
+                      <p class="mb-0"><strong>Phone:</strong> {{ doctordata.doctorregistration_contact }}</p>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="border rounded p-3 h-100">
+                      <h5 class="mb-2">Location</h5>
+                      <p class="mb-1"><strong>District:</strong> {{ doctordata.doctorregistration_place.district.district_name }}</p>
+                      <p class="mb-0"><strong>Place:</strong> {{ doctordata.doctorregistration_place.place_name }}</p>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="border rounded p-3">
+                      <h5 class="mb-2">Address</h5>
+                      <p class="mb-0">{{ doctordata.doctorregistration_address }}</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mt-4">
+                  <div class="row g-3">
+                    <div class="col-md-4">
+                      <div class="border rounded p-3 text-center">
+                        <h6 class="mb-1">Patients</h6>
+                        <p class="display-6 mb-0">320+</p>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="border rounded p-3 text-center">
+                        <h6 class="mb-1">Experience</h6>
+                        <p class="display-6 mb-0">12 yrs</p>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="border rounded p-3 text-center">
+                        <h6 class="mb-1">Availability</h6>
+                        <p class="display-6 mb-0">24/7</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock content %}

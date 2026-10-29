@@ -1,0 +1,54 @@
+{% extends 'Administrator/Header.html' %}
+{% block content %}
+<style>
+    .container-card{max-width:900px;margin:22px auto;padding:20px;border:1px solid #e6e6e6;border-radius:8px;background:#fafafa}
+    .form-row{display:flex;gap:12px;align-items:center}
+    .form-row label{min-width:80px}
+    .input-text{flex:1;padding:8px;border:1px solid #ccc;border-radius:4px}
+    .btn-submit{background:#2b8aef;color:#fff;border:none;padding:8px 14px;border-radius:4px;cursor:pointer}
+    .table{width:100%;border-collapse:collapse;margin-top:18px}
+    .table th,.table td{border:1px solid #ddd;padding:10px;text-align:left}
+    .table th{background:#f2f4f7}
+    .actions a{margin-right:8px;text-decoration:none;color:#fff;padding:6px 10px;border-radius:4px}
+    .actions .delete{background:#e74c3c}
+    .actions .edit{background:#3498db}
+    @media (max-width:600px){.form-row{flex-direction:column;align-items:stretch}}
+</style>
+
+<div class="container-card">
+    <h2 style="text-align:center;margin:0 0 14px">District</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-row">
+            <label for="txt_district">District</label>
+            <input id="txt_district" class="input-text" type="text" name="txt_district" value="{{ data.district_name }}" required placeholder="Enter district name">
+            <button type="submit" class="btn-submit">Submit</button>
+        </div>
+
+        <h3 style="text-align:center;margin-top:22px">District details</h3>
+        <table class="table" aria-label="District list">
+            <tr>
+                <th>Slno</th>
+                <th>District name</th>
+                <th>Action</th>
+            </tr>
+            {% for i in district %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ i.district_name }}</td>
+                <td class="actions">
+                    <a class="delete" href="{% url 'Administrator:Districtdelete' i.id %}">Delete</a>
+                    <a class="edit" href="{% url 'Administrator:districtedit' i.id %}">Edit</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3" style="text-align:center;padding:14px">No districts found.</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </form>
+</div>
+
+{% endblock %}

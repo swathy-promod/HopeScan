@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdminRegistration</title>
+</head> 
+<body>
+    <h2 align="center">Admin Registration</h2>
+    <form method="post">
+        {% csrf_token %}
+    <table border="1" align="center">
+        <tr>
+            <td>Name</td>
+            <td><input required type="text" name="txt_name" value="{{data.adminregistration_name}}" title="Name Allows Only Alphabets,Spaces and First Letter Must Be Capital Letter" pattern="^[A-Z]+[a-zA-Z ]*$" placeholder="Enter ur name"></td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td><input type="email" name="txt_email" value="{{data.adminregistration_email}}" required placeholder="enter email"></td>
+        </tr>
+        <tr>
+            <td>Password</td>
+            <td><input type="password" name="txt_password" value="{{data.adminregistration_password}}" required placeholder="enter password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"></td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center"><button type="submit">Submit</button></td>
+        </tr>
+    </table>
+    <h3 align="center">AdminRegistration</h3>
+    <table border="2" align="center">   
+        <tr>
+            <td>Slno</td>
+            <td>Name</td>
+            <td>email</td>
+            <td>password</td>
+            <td>Action</td>
+        </tr>
+        {% for i in adminregistration %}
+        <tr>
+            <td>{{forloop.counter}}</forloop></td>
+            <td>{{i.adminregistration_name}}</td>
+            <td>{{i.adminregistration_email}}</td>
+            <td>{{i.adminregistration_password}}</td>
+            <td><a href="{% url 'Administrator:Adminregistrationdelete' i.id %}">delete</a>
+                <a href="{% url 'Administrator:Adminregistrationedit' i.id %}">Edit</a></td>
+        </tr>
+        {% endfor %}
+
+    </table>
+    </form>
+</body>
+</html>

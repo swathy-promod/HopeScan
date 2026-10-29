@@ -1,0 +1,56 @@
+
+{% extends 'Administrator/Header.html' %}
+{% block content %}
+
+<style>
+    .container-card{max-width:820px;margin:22px auto;padding:20px;border:1px solid #eef3fb;border-radius:8px;background:#fff}
+    .form-row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+    .form-row label{min-width:100px}
+    .input-text{flex:1;padding:8px;border:1px solid #cbd7ea;border-radius:4px}
+    .btn-submit{background:#17a2b8;color:#fff;border:none;padding:8px 14px;border-radius:4px;cursor:pointer}
+    .table{width:100%;border-collapse:collapse;margin-top:18px}
+    .table th,.table td{border:1px solid #e6edf6;padding:10px;text-align:left}
+    .table th{background:#f7fbff}
+    .actions a{margin-right:8px;text-decoration:none;color:#fff;padding:6px 10px;border-radius:4px}
+    .actions .delete{background:#dc3545}
+    .actions .edit{background:#007bff}
+    @media (max-width:640px){.form-row{flex-direction:column;align-items:stretch}}
+</style>
+
+<div class="container-card">
+    <h2 style="text-align:center;margin:0 0 14px">Category</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-row">
+            <label for="txt_category">Category</label>
+            <input id="txt_category" class="input-text" type="text" name="txt_category" value="{{ data.category_name }}" required placeholder="Enter category">
+            <button type="submit" class="btn-submit">Submit</button>
+        </div>
+
+        <h3 style="text-align:center;margin-top:20px">Category details</h3>
+        <table class="table" aria-label="Category list">
+            <tr>
+                <th>Slno</th>
+                <th>Category</th>
+                <th>Action</th>
+            </tr>
+            {% for i in category %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ i.category_name }}</td>
+                <td class="actions">
+                    <a class="delete" href="{% url 'Administrator:Categorydelete' i.id %}">Delete</a>
+                    <a class="edit" href="{% url 'Administrator:categoryedit' i.id %}">Edit</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3" style="text-align:center;padding:14px">No categories found.</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </form>
+</div>
+
+{% endblock %}

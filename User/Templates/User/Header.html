@@ -1,0 +1,491 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>BMH hospital</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <link href="{% static 'Main/assets/img/favicon.png' %}" rel="icon">
+  <link href="{% static 'Main/assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'Main/assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'Main/assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'Main/assets/vendor/aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static 'Main/assets/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet">
+  <link href="{% static 'Main/assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'Main/assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="{% static 'Main/assets/css/main.css' %}" rel="stylesheet">
+
+  <!-- Custom Hover Effects -->
+  <style>
+    /* Icon Box Hover Effects */
+    .icon-box {
+      transition: all 0.4s ease;
+      border-radius: 8px;
+      padding: 30px;
+    }
+
+    .icon-box:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(102, 126, 234, 0.2);
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+    }
+
+    .icon-box i {
+      transition: all 0.4s ease;
+      font-size: 36px;
+      color: #0d5ba8;
+    }
+
+    .icon-box:hover i {
+      transform: scale(1.2) rotate(10deg);
+      color: #667eea;
+    }
+
+    /* Service Item Hover Effects */
+    .service-item {
+      transition: all 0.4s ease;
+      border-radius: 8px;
+      background: white;
+      padding: 20px;
+      border: 1px solid #f0f0f0;
+    }
+
+    .service-item:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+      border-color: #667eea;
+    }
+
+    .service-item .icon {
+      transition: all 0.4s ease;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 50%;
+      padding: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .service-item:hover .icon {
+      transform: scale(1.15) rotate(15deg);
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+    }
+
+    .service-item .icon i {
+      color: white;
+      transition: all 0.4s ease;
+    }
+
+    .service-item:hover .icon i {
+      transform: scale(1.2);
+    }
+
+    .service-item h3 {
+      transition: all 0.4s ease;
+      color: #333;
+    }
+
+    .service-item:hover h3 {
+      color: #667eea;
+    }
+
+    /* Why Box Hover Effects */
+    .why-box {
+      transition: all 0.4s ease;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 10px;
+      padding: 30px;
+      color: white;
+    }
+
+    .why-box:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 25px 50px rgba(102, 126, 234, 0.3);
+    }
+
+    .more-btn {
+      transition: all 0.4s ease;
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 10px 25px;
+      border-radius: 50px;
+      color: white;
+      text-decoration: none;
+      margin-top: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .more-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateX(5px);
+      border-color: rgba(255, 255, 255, 0.5);
+    }
+
+    /* Team Member Hover Effects */
+    .team-member {
+      transition: all 0.4s ease;
+      border-radius: 8px;
+      padding: 20px;
+    }
+
+    .team-member:hover {
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+      transform: translateY(-5px);
+    }
+
+    .team-member .pic {
+      transition: all 0.4s ease;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .team-member .pic img {
+      transition: all 0.4s ease;
+      border-radius: 8px;
+    }
+
+    .team-member:hover .pic img {
+      transform: scale(1.1);
+    }
+
+    .team-member .social a {
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 35px;
+      height: 35px;
+      background: #667eea;
+      color: white;
+      border-radius: 50%;
+      margin-right: 8px;
+    }
+
+    .team-member .social a:hover {
+      background: #764ba2;
+      transform: scale(1.2) rotate(10deg);
+    }
+
+    /* Gallery Item Hover Effects */
+    .gallery-item {
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+      border-radius: 8px;
+    }
+
+    .gallery-item img {
+      transition: all 0.4s ease;
+      border-radius: 8px;
+      display: block;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.15) rotate(2deg);
+      filter: brightness(1.1);
+    }
+
+    .gallery-item a {
+      transition: all 0.4s ease;
+      display: block;
+    }
+
+    /* Navigation Link Hover */
+    .navmenu a {
+      transition: all 0.3s ease;
+    }
+
+    .navmenu a:hover {
+      color: #667eea !important;
+      transform: translateY(-2px);
+    }
+
+    /* CTA Button Hover */
+    .cta-btn {
+      transition: all 0.4s ease;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+    }
+
+    /* Info Item Hover */
+    .info-item {
+      transition: all 0.4s ease;
+      border-radius: 8px;
+      padding: 15px;
+    }
+
+    .info-item:hover {
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+      transform: translateX(10px);
+    }
+
+    .info-item i {
+      transition: all 0.4s ease;
+      color: #667eea;
+    }
+
+    .info-item:hover i {
+      transform: scale(1.3) rotate(10deg);
+    }
+
+    /* FAQs Hover */
+    .faq-item {
+      transition: all 0.4s ease;
+      border-radius: 8px;
+    }
+
+    .faq-item:hover {
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.1);
+      transform: translateX(5px);
+    }
+
+    .faq-item h3 {
+      transition: all 0.4s ease;
+      color: #333;
+    }
+
+    .faq-item:hover h3 {
+      color: #667eea;
+    }
+
+    /* Button Hover Effects */
+    button[type="submit"] {
+      transition: all 0.4s ease;
+    }
+
+    button[type="submit"]:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+    }
+
+    /* Form Input Hover/Focus */
+    .form-control {
+      transition: all 0.3s ease;
+      border-color: #e0e0e0;
+    }
+
+    .form-control:hover {
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    .form-control:focus {
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15);
+    }
+
+    /* Smooth Scroll Top */
+    #scroll-top {
+      transition: all 0.3s ease;
+    }
+
+    #scroll-top:hover {
+      transform: translateY(-5px);
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    /* Stats Item Hover */
+    .stats-item {
+      transition: all 0.4s ease;
+    }
+
+    .stats-item:hover {
+      transform: scale(1.1);
+    }
+
+    .stats-item span {
+      transition: all 0.4s ease;
+    }
+
+    .stats-item:hover span {
+      color: #667eea;
+    }
+  </style>
+
+  <!-- =======================================================
+  * Template Name: Medilab
+  * Template URL: https://bootstrapmade.com/medilab-free-medical-bootstrap-theme/
+  * Updated: Aug 07 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body class="index-page">
+
+  <header id="header" class="header sticky-top">
+
+    <div class="topbar d-flex align-items-center">
+      <div class="container d-flex justify-content-center justify-content-md-between">
+        <div class="contact-info d-flex align-items-center">
+          <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">bmh@gmail.com</a></i>
+          <i class="bi bi-phone d-flex align-items-center ms-4"><span>+91 6282121953</span></i>
+        </div>
+        <div class="social-links d-none d-md-flex align-items-center">
+          <a href="#" class="twitter"><i class="bi bi-twitter-x"></i></a>
+          <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+          <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+          <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+        </div>
+      </div>
+    </div><!-- End Top Bar -->
+
+    <div class="branding d-flex align-items-center">
+
+      <div class="container position-relative d-flex align-items-center justify-content-between">
+        <a href="index.html" class="logo d-flex align-items-center me-auto">
+          <!-- Uncomment the line below if you also wish to use an image logo -->
+          <!-- <img src="{% static 'Main/assets/img/logo.png' %}" alt=""> -->
+          <h1 class="sitename">Baby Memorial Hospital</h1>
+        </a>
+
+        <nav id="navmenu" class="navmenu">
+          <ul>
+            <li><a href="{% url 'User:Homepage' %}" class="active">Home<br></a></li>
+            <li><a href="{% url 'User:Myprofile' %}">My Profile</a></li>
+            <li><a href="{% url 'User:MyAppointment' %}">My Appointments</a></li>
+            <li><a href="{% url 'User:Complaint' %}">Complaint</a></li>
+            <li><a href="{% url 'User:Feedback' %}">Feedback</a></li>
+            <li><a href="{% url 'User:Imagepredict' %}">BCD</a></li>
+
+          </ul>
+          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+
+        <a class="cta-btn d-none d-sm-block" href="{% url 'Guest:index' %}">Logout</a>
+
+      </div>
+
+    </div>
+
+  </header>
+
+  <main class="main">
+    <div align="center">
+  {% block content %}
+  {% endblock content %}
+  </div>
+  </main>
+
+   <footer id="footer" class="footer light-background">
+
+    <div class="container footer-top">
+      <div class="row gy-4">
+        <div class="col-lg-4 col-md-6 footer-about">
+          <a href="index.html" class="logo d-flex align-items-center">
+            <span class="sitename">Baby Memorial</span>
+          </a>
+          <div class="footer-contact pt-3">
+            <p>A108 Adam Street</p>
+            <p>New York, NY 535022</p>
+            <p class="mt-3"><strong>Phone:</strong> <span>+1 5589 55488 55</span></p>
+            <p><strong>Email:</strong> <span>info@example.com</span></p>
+          </div>
+          <div class="social-links d-flex mt-4">
+            <a href=""><i class="bi bi-twitter-x"></i></a>
+            <a href=""><i class="bi bi-facebook"></i></a>
+            <a href=""><i class="bi bi-instagram"></i></a>
+            <a href=""><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-3 footer-links">
+          <h4>Useful Links</h4>
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About us</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Terms of service</a></li>
+            <li><a href="#">Privacy policy</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-2 col-md-3 footer-links">
+          <h4>Our Services</h4>
+          <ul>
+            <li><a href="#">Web Design</a></li>
+            <li><a href="#">Web Development</a></li>
+            <li><a href="#">Product Management</a></li>
+            <li><a href="#">Marketing</a></li>
+            <li><a href="#">Graphic Design</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-2 col-md-3 footer-links">
+          <h4>Hic solutasetp</h4>
+          <ul>
+            <li><a href="#">Molestiae accusamus iure</a></li>
+            <li><a href="#">Excepturi dignissimos</a></li>
+            <li><a href="#">Suscipit distinctio</a></li>
+            <li><a href="#">Dilecta</a></li>
+            <li><a href="#">Sit quas consectetur</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-2 col-md-3 footer-links">
+          <h4>Nobis illum</h4>
+          <ul>
+            <li><a href="#">Ipsam</a></li>
+            <li><a href="#">Laudantium dolorum</a></li>
+            <li><a href="#">Dinera</a></li>
+            <li><a href="#">Trodelas</a></li>
+            <li><a href="#">Flexo</a></li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="container copyright text-center mt-4">
+      <p>© <span>Copyright</span> <strong class="px-1 sitename">Medilab</strong> <span>All Rights Reserved</span></p>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you've purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> Distributed by <a href=“https://themewagon.com>ThemeWagon
+      </div>
+    </div>
+
+  </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'Main/assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'Main/assets/vendor/php-email-form/validate.js' %}"></script>
+  <script src="{% static 'Main/assets/vendor/aos/aos.js' %}"></script>
+  <script src="{% static 'Main/assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'Main/assets/vendor/purecounter/purecounter_vanilla.js' %}"></script>
+  <script src="{% static 'Main/assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+
+  <!-- Main JS File -->
+  <script src="{% static 'Main/assets/js/main.js' %}"></script>
+
+</body>
+
+</html>
+
+

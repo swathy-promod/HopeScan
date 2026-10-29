@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit-Profile</title>
+</head>
+<body>
+    <form method="POST">
+        {% csrf_token %}
+    <table>
+        <tr>
+            <td>name</td>
+            <td>
+                <input type="text" name="txt_name" value="{{doctordata.doctorregistration_name}}"required placeholder="enter your name" title="Name Allows Only Alphabets,Spaces and First Letter Must Be Capital Letter" pattern="^[A-Z]+[a-zA-Z ]*$"/>
+            </td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td>
+                <input type="text" name="txt_email" value="{{doctordata.doctorregistration_email}}"required placeholder="enter your email"/>
+            </td>
+        </tr>
+        <tr>
+            <td>Contact</td>
+            <td>
+                <input type="text" name="txt_contact" value="{{doctordata.doctorregistration_contact}}"required placeholder="enter your contact" pattern="[7-9]{1}[0-9]{9}" 
+                title="Phone number with 7-9 and remaing 9 digit with 0-9"/>
+            </td>
+        </tr>
+        <tr>
+            <td>Address</td>
+            <td>
+                <input type="text" name="txt_address" value="{{doctordata.doctorregistration_address}}"required placeholder="enter your address"/>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center"><input type="submit"></td>
+        </tr>
+    </table>
+    </form>
+</body>
+</html>

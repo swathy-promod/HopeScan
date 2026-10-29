@@ -1,0 +1,8 @@
+Dataset link
+
+link2:https://www.kaggle.com/datasets/vuppalaadithyasairam/ultrasound-breast-images-for-breast-cancer
+
+python version
+3.10
+tf version= 2.20.0
+
